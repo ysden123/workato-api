@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018. Yuriy Stul
+  -->
+
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <RollingFile
+                name="File"
+                fileName="log/workato-api.log"
+                filePattern="log/workato-api.%i.log">
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="5" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="File" />
+        </Root>
+        <Logger name="com.zaxxer" level="error"/>
+        <Logger name="slick" level="error"/>
+        <Logger name="akka" level="error"/>
+        <Logger name="com.typesafe" level="error"/>
+    </Loggers>
+</Configuration>
